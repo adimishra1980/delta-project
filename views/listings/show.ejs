@@ -1,4 +1,9 @@
 <% layout("/layouts/boilerplate") %>
+<style>
+  textarea {
+    resize: none;
+  }
+</style>
 
 <script>
   const mapToken = "<%= process.env.MAP_TOKEN %>";
@@ -11,13 +16,13 @@
   </div>
   <div class="card col-6 offset-2 show-card listing-card">
     <img
-      src="<%= listing.image.url %>"
+      src="<%= listing.image.url%>"
       class="card-img-top show-img"
       alt="listing-image"
     />
     <div class="card-body">
       <p class="card-text">
-        <i>Owned by: <b> <%= listing.owner.username %> </b></i>
+        <i>owned by:<b><%= listing.owner.username %></b></i>
       </p>
       <p class="card-text"><%= listing.description %></p>
       <p class="card-text">
@@ -28,14 +33,13 @@
     </div>
   </div>
 
-  <% if(currUser && listing.owner._id.equals(currUser._id)){ %>
+  <% if(currUser && currUser._id.equals(listing.owner._id)) {%>
   <div class="btns">
     <a
       href="/listings/<%= listing._id %>/edit"
       class="btn btn-dark col-1 offset-2 edit-btn"
-      >Edit
-    </a>
-
+      >Edit</a
+    >
     <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
       <button class="btn btn-dark offset-4">Delete</button>
     </form>
@@ -43,9 +47,9 @@
   <% } %>
 
   <div class="col-8 offset-2 mb-3">
+    <% if(currUser) { %>
     <hr />
     <h4>Leave a Review</h4>
-    <% if(currUser) { %>
     <form
       action="/listings/<%= listing._id %>/reviews"
       method="POST"
@@ -112,15 +116,17 @@
           class="form-control"
           required
         ></textarea>
-        <div class="invalid-feedback">Please add some comments for review</div>
+        <div class="invalid-feedback">
+          Please submit some comments for review
+        </div>
       </div>
       <button class="btn btn-outline-dark">Submit</button>
     </form>
     <hr />
-    <% } %> <% if(listing.reviews.length > 0) { %>
+    <% } %> <% if(listing.reviews.length > 0) {%>
     <div class="row">
       <p><b>All Reviews</b></p>
-      <% for(review of listing.reviews) {%>
+      <% for(review of listing.reviews){ %>
       <div class="card col-5 ms-3 mb-3">
         <div class="card-body">
           <h5 class="card-title"><b>@<%= review.author.username %></b></h5>
@@ -132,10 +138,10 @@
         </div>
         <form
           class="mb-3"
-          method="POSt"
+          method="POST"
           action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
         >
-          <button class="btn btn-sm btn-dark">Delete</button>
+          <button class="btn btn-dark btn-sm">Delete</button>
         </form>
       </div>
       <% } %>
@@ -143,11 +149,10 @@
     <% } %>
   </div>
 
-  <div class="col-6 offset-3 mb-3">
+  <div class="col-6 offset-2 mb-3">
     <h3>Where you'll be</h3>
     <div id="map"></div>
   </div>
 </div>
-
 
 <script src="/js/map.js"></script>

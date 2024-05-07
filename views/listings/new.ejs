@@ -1,8 +1,13 @@
 <% layout("/layouts/boilerplate") %>
+<style>
+  textarea {
+    resize: none;
+  }
+</style>
 
 <div class="row mt-3">
   <div class="col-8 offset-2">
-    <h3 class="bold-txt">Create a New Listing</h3>
+    <h3><b>Create new listing</b></h3>
     <form
       method="POST"
       action="/listings"
@@ -13,30 +18,35 @@
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input
-          type="text"
           name="listing[title]"
-          placeholder="enter title"
+          placeholder="Enter a catchy title"
+          type="text"
           class="form-control"
           required
         />
-        <div class="valid-feedback">Looks good!</div>
+        <div class="valid-feedback">Title Looks Good!</div>
       </div>
 
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
         <textarea
           name="listing[description]"
-          placeholder="enter description"
+          placeholder="Description should be well explanied"
+          type="text"
           class="form-control"
           required
         ></textarea>
         <div class="invalid-feedback">Description should be short</div>
       </div>
 
-
       <div class="mb-3">
         <label for="image" class="form-label">Upload Listing Image</label>
-        <input type="file" name="listing[image]" class="form-control" />
+        <input
+          name="listing[image]"
+          type="file"
+          class="form-control"
+          required
+        />
       </div>
 
       <div class="row">
@@ -54,9 +64,9 @@
         <div class="mb-3 col-md-8">
           <label for="country" class="form-label">Country</label>
           <input
-            type="text"
             name="listing[country]"
             placeholder="enter country"
+            type="text"
             class="form-control"
             required
           />
@@ -67,9 +77,9 @@
       <div class="mb-3">
         <label for="location" class="form-label">Location</label>
         <input
-          type="text"
           name="listing[location]"
           placeholder="enter location"
+          type="text"
           class="form-control"
           required
         />
@@ -77,6 +87,7 @@
       </div>
 
       <button class="btn btn-dark add-btn mt-3">Add</button>
+      <br />
     </form>
   </div>
 </div>

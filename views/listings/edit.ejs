@@ -1,8 +1,16 @@
 <% layout("/layouts/boilerplate") %>
+<style>
+  textarea {
+    resize: none;
+  }
+  img {
+    width: 250px;
+  }
+</style>
 
 <div class="row mt-3">
   <div class="col-8 offset-2">
-    <h3 class="bold-txt">Edit your Listing</h3>
+    <h3>Edit your listing</h3>
     <form
       method="POST"
       action="/listings/<%= listing._id %>?_method=PUT"
@@ -13,9 +21,9 @@
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input
-          type="text"
           name="listing[title]"
           value="<%= listing.title %>"
+          type="text"
           class="form-control"
           required
         />
@@ -25,34 +33,34 @@
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
         <textarea
-          type="text"
           name="listing[description]"
-          required
+          type="text"
           class="form-control"
+          required
         >
-        <%= listing.description %></textarea
+<%= listing.description %></textarea
         >
         <div class="invalid-feedback">Description should be short</div>
       </div>
 
       <div class="mb-3">
         <p>Original Image</p>
-        <img src="<%= originalImageUrl %>">
+        <img src="<%= originalImageUrl %>" />
       </div>
 
       <div class="mb-3">
-        <label for="image" class="form-label">Upload New Image</label>
-        <input type="file" name="listing[image]" class="form-control" />
+        <label for="image" class="form-label">Upload Listing Image</label>
+        <input name="listing[image]" type="file" class="form-control" />
       </div>
 
       <div class="row">
         <div class="mb-3 col-md-4">
           <label for="price" class="form-label">Price</label>
           <input
-            type="number"
             name="listing[price]"
-            class="form-control"
             value="<%= listing.price %>"
+            type="number"
+            class="form-control"
             required
           />
           <div class="invalid-feedback">Price should be valid</div>
@@ -61,10 +69,10 @@
         <div class="mb-3 col-md-8">
           <label for="country" class="form-label">Country</label>
           <input
-            type="text"
             name="listing[country]"
-            class="form-control"
             value="<%= listing.country %>"
+            type="text"
+            class="form-control"
             required
           />
           <div class="invalid-feedback">Country name should be valid</div>
@@ -74,10 +82,10 @@
       <div class="mb-3">
         <label for="location" class="form-label">Location</label>
         <input
-          type="text"
           name="listing[location]"
-          class="form-control"
           value="<%= listing.location %>"
+          type="text"
+          class="form-control"
           required
         />
         <div class="invalid-feedback">Location should be valid</div>
@@ -87,4 +95,3 @@
     </form>
   </div>
 </div>
-<script src="/js/script.js"></script>
