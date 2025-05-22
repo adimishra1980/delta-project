@@ -8,6 +8,7 @@ const { storage } = require("../cloudConfig.js");
 const upload = multer({ storage });
 
 const listingController = require("../controllers/listing.js");
+const {mapboxSafetyMiddleware}  = require("../middlewares/mapboxLimiter.js")
 
 //index route and create route
 router
@@ -17,6 +18,7 @@ router
     isLoggedIn,
     upload.single("listing[image]"),
     validateListing,
+    mapboxSafetyMiddleware,    
     wrapAsync(listingController.createListing)
   );
 
